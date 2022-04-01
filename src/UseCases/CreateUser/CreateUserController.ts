@@ -1,13 +1,19 @@
 import { Request, Response } from 'express'
+import { ICreateUserDTO } from './CreateUserDTO'
 import { CreateUserUseCase }  from './CreateUserUseCase'
-import { ICreateUserUseCase } from './ICreateUserUseCase'
 
-class UserController{
-    async CreateUserUseCase(request: Request, response: Response){
-        const { name, email, password }: ICreateUserUseCase = request.body
-        const createUserCase = new CreateUserUseCase
-        const user = await createUserCase.execute({name, email, password})
-        response.json({user})
+class CreateUserController{
+
+    constructor(private createUserUsecase: CreateUserUseCase){}
+
+    async handler(request: Request, response: Response){
+
+        const { name, email, password }: ICreateUserDTO = request.body
+        
+        await this.createUserUsecase.execute({name, email, password})
+
+        return response.json()
+
     }
 }
-export { UserController }
+export { CreateUserController }
