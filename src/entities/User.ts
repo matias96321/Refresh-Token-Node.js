@@ -1,18 +1,17 @@
-import {v4 as uuidv4} from 'uuid'
-
+import {v4 as uuid} from 'uuid'
 class User{
   
-  public readonly uuid: string; 
+  public readonly id: string; 
   public name: string; 
   public password: string;
   public email: string; 
   public date: string; // me lembrar de tirar !!!!!!!!
 
-  constructor(props: Omit<User, "uuid" | 'date'>, uuid?: string){
+  constructor(props: Omit<User, "id" | 'date'>, id?: string){
     Object.assign(this, props)
     
-    if(!this.uuid){
-      this.uuid = uuidv4()
+    if(!this.id){
+      this.id = uuid()
       const date = new Date
       this.date = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
     }
