@@ -10,10 +10,18 @@ datasource db {
   url      = "file:../src/Database/database.db"
 }
 
-model Users{
-  id       String @id @default(uuid())
-  name     String 
-  password String
-  email    String @unique
-  createdAt DateTime @default(now())
+ model Users{
+  id      String @id
+  name      String 
+  password  String
+  email     String @unique
+  date      String
+  refresh_token RefreshToken?
 }
+
+  model RefreshToken{
+    id          String @id
+    expiryIn    Int
+    user        Users @relation(fields: [user_id], references: [id])  
+    user_id     String
+  }
