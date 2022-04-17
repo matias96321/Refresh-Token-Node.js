@@ -1,19 +1,24 @@
 import { Router } from 'express'
 import { authenticateUserController } from './UseCases/AuthenticateUser'
 import { createUserController } from './UseCases/CreateUser'
-import { Auth } from './middlewares/auth'
+import { refreshTokenController } from './UseCases/RefreshToken'
+import { Auth } from './middlewares/auth/Auth'
 
 const router = Router()
 
-router.post('/users',  (request, response) => {
+router.post('/api/signup',  (request, response) => {
     return createUserController.handler(request, response)
 })
 
-router.post('/authenticate', (request, response) => {
+router.post('/api/auth/signin', (request, response) => {
     return authenticateUserController.handler(request, response)
 })
 
-router.get('/movies/avengers', new Auth().handle, (request, response) => {
+router.post('/api/auth/refresh-token',(request, response)=>{
+    return refreshTokenController.handler(request, response)
+})
+
+router.get('/api/movies/avengers', new Auth().handle, (request, response) => {
     let movies = [
         { id: 1 ,movie: 'Avengers: Endgame', year: 2019 },
         { id: 2, movie: 'Avengers: Age of Ultron', year: 2015 },
