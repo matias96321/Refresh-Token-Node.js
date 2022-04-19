@@ -1,7 +1,6 @@
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../UseCases/CreateUser/ICreateUserRepository";
 import { PrismaClient } from '@prisma/client'
-
 class UsersRepository implements IUsersRepository{
     
     private dataBase = new PrismaClient
@@ -11,8 +10,8 @@ class UsersRepository implements IUsersRepository{
         return user
     }
 
-    async save(data: User): Promise<void> {
-        await this.dataBase.users.create({data})
+    async save(userDTO: User): Promise<void> {
+        await this.dataBase.users.create({data: userDTO})
     }
 }
 
