@@ -6,9 +6,7 @@ const app = express()
 const port = 8000
 
 app.use(express.json())
-
 app.use(router)
-
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
     response.status(401).json({
@@ -16,6 +14,5 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
         massage: err.message,
     });
 }); 
-
 
 app.listen(port, ()=>console.log(`http://localhost:${port}/`));
