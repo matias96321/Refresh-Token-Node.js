@@ -1,6 +1,5 @@
 import { User } from "../../entities/User"
-
-interface IAuthenticateUserRepository{
+interface IAuthenticateUserRepository {
     findByEmail(email: string): Promise<User>
 }
 
