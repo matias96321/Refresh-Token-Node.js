@@ -1,25 +1,21 @@
 import { hash } from 'bcryptjs'
 import { IUsersRepository } from './ICreateUserRepository'
-import { ICreateUserDTO } from './CreateUserDTO'
+import { CreateUserDTO } from './CreateUserDTO'
 import { User } from '../../entities/User'
-
 class CreateUserUseCase {
 
-    constructor(private usersRepository: IUsersRepository){}
+    constructor(private usersRepository: IUsersRepository) { }
 
-    async execute(data: ICreateUserDTO){
-        
-        const findUser = await this.usersRepository.findByEmail(data.email)
+    async execute(userDTO: CreateUserDTO) {
 
-        if(findUser){
-            throw new Error("Email already registered!")
-        }
+        const findUser = await this.usersRepository.findByEmail(userDTO.email)
 
-        data.password = await hash(data.password,10)
+        if (findUser)
+        throw new Error("Email already registered!")
 
-        const user = new User(data)
-        
-        await this.usersRepository.save(user)
+        userDTO.password = await hash(userDTO.password, 10)
+
+        await this.usersRepository.save(new User(userDTO))
     }
 }
 export { CreateUserUseCase }
