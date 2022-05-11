@@ -30,9 +30,6 @@ $ yarn add @types/express ts-node-dev -D
 ## Inciando o projeto
 
 Iniciando o prisma no projeto
-```sh
-$ yarn prisma init
-```
 
 ## Tecnologias usadas no projeto
 
