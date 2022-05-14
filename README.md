@@ -21,7 +21,7 @@ Intalando o Prisma e @prisma/client
 $ yarn add prisma -D @prisma/client 
 ```
 
-Instalando tipagens do express e ts-node-dev como dependência de desenvolvimento
+Instalando tipagens do express e ts-node-dev
 
 ```sh
 $ yarn add @types/express ts-node-dev -D
